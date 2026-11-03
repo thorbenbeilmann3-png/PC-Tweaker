@@ -1,2 +1,50 @@
 # PC-Tweaker
-PC-Tweaker mit lokalem Ollama-Agent und Windows-Setup
+
+Windows-PC-Diagnose und Wartung mit optionaler lokaler Ollama-Anbindung.
+
+## Aktueller Stand
+
+Dies ist das Grundgerüst (Version 0.1.0), noch keine fertige Tweaker-Suite. Enthalten sind eine erste Desktop-Oberfläche, eine rein lesende Systemübersicht sowie Start- und Build-Skripte. Update-Verwaltung, Geräte-/Treiberdiagnose und Ollama-Steuerung sind als nächste Ausbaustufen vorgesehen.
+
+**Sicherheitsprinzip:** Keine Treiber- oder Systemänderung ohne ausdrückliche Bestätigung. Unbekannte Treiberquellen werden nicht verwendet. Die App soll ohne Ollama nutzbar bleiben.
+
+## Voraussetzungen
+
+- Windows 10/11 (die tatsächliche Kompatibilität wird noch getestet)
+- Python 3.11 oder neuer
+- Internetverbindung für die erstmalige Installation der Python-Abhängigkeiten
+
+## Starten
+
+1. Repository herunterladen: **Code → Download ZIP**, oder mit Git klonen.
+2. ZIP entpacken.
+3. `STARTEN.bat` doppelklicken.
+
+Das Skript erstellt eine lokale virtuelle Python-Umgebung und installiert die Abhängigkeiten. Es installiert Python nicht automatisch. Falls der Python-Launcher fehlt, öffnet es die offizielle Download-Seite.
+
+## EXE bauen
+
+`BAUEN_EXE.bat` doppelklicken. Die EXE-Ausgabe wird mit PyInstaller unter `dist/PC-Tweaker/` erstellt. Der Build muss auf Windows ausgeführt und dort getestet werden.
+
+## Tests
+
+In einer aktivierten virtuellen Umgebung:
+
+```powershell
+python -m pip install -e ".[dev]"
+python -m pytest -q
+```
+
+## Roadmap
+
+- [ ] Windows-Update- und winget-Status mit Bestätigung vor Änderungen
+- [ ] Geräte-Manager-Diagnose inklusive Problemcodes und Hardware-IDs
+- [ ] Treiberprüfung über verifizierte Herstellerquellen, keine blinden Treiber-Updater
+- [ ] Wiederherstellungspunkte und unterstützter Rollback
+- [ ] Optionale lokale Ollama-Anbindung
+- [ ] Windows-CI, GUI-Test und reproduzierbarer EXE-Test
+- [ ] Installationspaket, Symbol und Startmenü-Verknüpfung
+
+## Status der Prüfung
+
+Noch nicht auf einem echten Windows-PC ausgeführt. Es liegt daher derzeit **kein bestätigter Windows-Laufzeittest und keine geprüfte EXE** vor.
