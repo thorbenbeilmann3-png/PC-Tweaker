@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pc-tweaker"
+version = "0.1.0"
+description = "Windows PC diagnosis and maintenance with optional local Ollama integration"
+requires-python = ">=3.11"
+dependencies = ["PySide6>=6.8,<7", "psutil>=6.1,<8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9", "pyinstaller>=6.11,<7"]
+
+[project.scripts]
+pc-tweaker = "pc_tweaker.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
