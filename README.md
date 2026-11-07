@@ -22,6 +22,10 @@ Dies ist das Grundgerüst (Version 0.1.0), noch keine fertige Tweaker-Suite. Ent
 
 Das Skript erstellt eine lokale virtuelle Python-Umgebung und installiert die Abhängigkeiten. Es installiert Python nicht automatisch. Falls der Python-Launcher fehlt, öffnet es die offizielle Download-Seite.
 
+## PC-Bestandsaufnahme (NOXARION Phase 1)
+
+`BESTANDSAUFNAHME.bat` doppelklicken. Das Skript ändert nichts, es liest nur. Der Bericht landet auf dem Desktop unter `NOXARION-Bestandsaufnahme\`. Python wird dafür nicht benötigt. Details und Status: `docs/NOXARION-EINRICHTUNG.md`. Ein Lauf auf einem echten Windows-PC steht noch aus.
+
 ## EXE bauen
 
 `BAUEN_EXE.bat` doppelklicken. Die EXE-Ausgabe wird mit PyInstaller unter `dist/PC-Tweaker/` erstellt. Der Build muss auf Windows ausgeführt und dort getestet werden.
