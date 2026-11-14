@@ -51,3 +51,30 @@ dadurch knapp nicht – nimm z. B. `--sizes 380,180,360` oder lass Puffer.
 - `diskmgmt.msc`: drei Volumes mit den gewuenschten Groessen, alles NTFS.
 - Planer erneut laufen lassen: `python -m pc_tweaker.partition_plan` zeigt die neue Aufteilung.
 - Backup erst loeschen, wenn alles laeuft.
+
+## Sonderfall: frisches Windows, leere 1-TB-Platte (nichts belegt)
+
+Dann ist kein „Volume verkleinern“ mit Daten-Verschiebung nötig – am saubersten direkt
+bei der Windows-Installation (oder sofort danach auf der leeren Platte).
+
+**Wichtig:** 1 TB = 931 GiB, wie Windows „931 GB“ anzeigt. 400+200+400 GB *dezimal*
+wäre 1000 GB – das passt physikalisch nicht. In Windows-Einheiten (GiB) passt:
+**Windows ~371 GB, KI ~186 GB, NAS ~374 GB** (= 400/200/400 GB dezimal gefühlt).
+
+### Weg A (empfohlen): direkt beim Windows-Setup
+1. Windows-Installer → **„Benutzerdefiniert“** → 1-TB-Platte → alle Partitionen löschen → **„Neu“**.
+2. Größe **380000 MB** eingeben → **„Übernehmen“** (Windows legt EFI/MSR/Recovery automatisch drumherum an).
+3. Windows auf dieser Partition installieren.
+4. Nach der Installation `diskmgmt.msc` → im nicht zugeordneten Rest (~572000 MB):
+   - **KI**: neues Volume **190000 MB**, NTFS, Buchstabe `D:`, Name „KI“
+   - **NAS**: neues Volume **„maximal verfügbar“** (~382568 MB), NTFS, Buchstabe `E:`, Name „NAS“
+
+### Weg B: Windows ist schon installiert (frisch, leer)
+1. `diskmgmt.msc` → C: rechtsklicken → **„Volume verkleinern“** → **572568 MB** verkleinern
+   (damit bleiben 380000 MB ≈ 371 GB ≈ 400 GB dezimal für Windows; auf leerem C: klappt das sofort).
+2. Danach wie in Weg A Schritt 4: KI 190000 MB (D:) und NAS Rest (E:), beide NTFS.
+
+### Danach (unverändert)
+- KI-Modelle: `OLLAMA_MODELS=D:\KI\modelle` als System-Umgebungsvariable, Modelle neu laden.
+- NAS: Ordner `E:\Freigaben` anlegen, per SMB nur im LAN freigeben.
+- Kontrolle: `python -m pc_tweaker.partition_plan` zeigt die neue Aufteilung.
