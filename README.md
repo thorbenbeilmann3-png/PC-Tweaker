@@ -63,3 +63,14 @@ Der Nutzer soll einen beliebigen Startordner auswählen können. PC-Tweaker durc
 ## Status der Prüfung
 
 Noch nicht auf einem echten Windows-PC ausgeführt. Es liegt daher derzeit **kein bestätigter Windows-Laufzeittest und keine geprüfte EXE** vor.
+
+## Partitionierung planen (nur lesend)
+
+Zum Aufteilen einer Platte (z. B. 1 TB in Windows 400 / KI 200 / NAS 400 GB) gibt es einen
+lesenden Planer, der nichts am System ändert:
+
+```bat
+python -m pc_tweaker.partition_plan --sizes 400,200,400
+```
+
+Sichere manuelle Umsetzung (Backup zuerst!): siehe [docs/partitionieren.md](docs/partitionieren.md).
